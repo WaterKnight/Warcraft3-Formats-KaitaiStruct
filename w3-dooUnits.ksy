@@ -2,6 +2,8 @@ meta:
   id: w3_doo_units
   file-extension: doo
   endian: le
+  imports:
+    - w3id
 seq:
   - id: file_id
     type: w3id
@@ -16,12 +18,6 @@ seq:
     repeat: expr
     repeat-expr: units_amount
 types:
-  w3id:
-    seq:
-      - id: value
-        encoding: UTF-8
-        size: 4
-        type: str
   unit:
     seq:
       - id: id

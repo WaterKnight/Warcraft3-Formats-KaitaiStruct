@@ -2,6 +2,8 @@ meta:
   id: w3_w3e
   file-extension: w3e
   endian: le
+  imports:
+    - w3id
 seq:
   - id: file_id
     type: w3id
@@ -37,12 +39,6 @@ seq:
     repeat: expr
     repeat-expr: map_width * map_height
 types:
-  w3id:
-    seq:
-      - id: value
-        encoding: ASCII
-        size: 4
-        type: str
   tile_node:
     seq:
       - id: ground_height

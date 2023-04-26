@@ -2,6 +2,9 @@ meta:
   id: w3_w3r
   file-extension: w3r
   endian: le
+  imports:
+    - w3id
+    - w3str
 seq:
   - id: version
     type: u4
@@ -12,17 +15,6 @@ seq:
     repeat: expr
     repeat-expr: regions_amount
 types:
-  w3str:
-    seq:
-      - id: value
-        encoding: UTF-8
-        type: strz
-  w3id:
-    seq:
-      - id: value
-        encoding: ASCII
-        size: 4
-        type: str
   region:
     seq:
       - id: left

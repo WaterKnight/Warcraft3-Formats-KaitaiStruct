@@ -1,7 +1,11 @@
 meta:
-  id: wc3_w3i
+  id: w3_w3i
   file-extension: w3i
   endian: le
+  imports:
+    - w3id
+    - w3str
+    - w3char
 seq:
   - id: version
     type: u4
@@ -113,24 +117,6 @@ seq:
     if: version == 26 or version == 27
 
 types:
-  w3str:
-    seq:
-      - id: value
-        type: str
-        terminator: 0
-        encoding: UTF-8
-  w3char:
-    seq:
-      - id: value
-        type: str
-        encoding: ASCII
-        size: 1
-  w3id:
-    seq:
-      - id: value
-        type: str
-        encoding: ASCII
-        size: 4
   point_2d:
     seq:
       - id: x

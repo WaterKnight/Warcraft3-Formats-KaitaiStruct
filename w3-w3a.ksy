@@ -2,6 +2,9 @@ meta:
   id: w3_w3a
   file-extension: w3a
   endian: le
+  imports:
+    - w3id
+    - w3str
 seq:
   - id: version
     type: u4
@@ -10,17 +13,6 @@ seq:
   - id: custom_objects_chunk
     type: objects_chunk
 types:
-  w3str:
-    seq:
-      - id: value
-        encoding: UTF-8
-        type: strz
-  w3id:
-    seq:
-      - id: value
-        encoding: ASCII
-        size: 4
-        type: str
   objects_chunk:
     seq:
       - id: amount
@@ -67,7 +59,7 @@ types:
             var_types::unreal: f4
             _: w3str
       - id: end_token
-        type: u4
+        type: w3id
 enums:
   var_types:
     0: int

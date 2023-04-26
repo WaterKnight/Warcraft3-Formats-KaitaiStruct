@@ -1,7 +1,9 @@
 meta:
-  id: w3_wmp
-  file-extension: wmp
+  id: w3_wpm
+  file-extension: wpm
   endian: le
+  imports:
+    - w3id
 seq:
   - id: file_id
     type: w3id
@@ -15,10 +17,3 @@ seq:
     type: u1
     repeat: expr
     repeat-expr: width * height
-types:
-  w3id:
-    seq:
-      - id: value
-        encoding: ASCII
-        size: 4
-        type: str

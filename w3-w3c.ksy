@@ -2,6 +2,8 @@ meta:
   id: w3_w3c
   file-extension: w3c
   endian: le
+  imports:
+    - w3str
 seq:
   - id: version
     type: u4
@@ -12,11 +14,6 @@ seq:
     repeat: expr
     repeat-expr: cameras_amount
 types:
-  w3str:
-    seq:
-      - id: value
-        encoding: UTF-8
-        type: strz
   camera:
     seq:
       - id: target_x

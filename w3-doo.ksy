@@ -2,6 +2,8 @@ meta:
   id: w3_doo
   file-extension: doo
   endian: le
+  imports:
+    - w3id
 seq:
   - id: file_id
     type: u4
@@ -24,12 +26,6 @@ seq:
     repeat: expr
     repeat-expr: special_doodads_amount
 types:
-  w3id:
-    seq:
-      - id: value
-        encoding: ASCII
-        size: 4
-        type: str
   doodad:
     seq:
       - id: id

@@ -33,15 +33,16 @@ types:
       - id: fade_out_rate
         type: u4
       - id: volume
-        type: u4
+        type: s4
       - id: pitch
         type: f4
       - id: unknown_1
         type: u4
       - id: unknown_2
-        type: u4
+        type: s4
       - id: channel
-        type: u4
+        type: s4
+        enum: channel
       - id: min_distance
         type: f4
       - id: max_distance
@@ -62,32 +63,34 @@ types:
         type: f4
       - id: var_name
         type: w3str
+        if: _root.version >= 3
       - id: internal_sound_name
         type: w3str
-        if: version >= 3
+        if: _root. version >= 3
       - id: sound_path
         type: w3str
-        if: version >= 3
+        if:  _root.version >= 3
       - id: unknown_9
         type: f4
+        if:  _root.version >= 3
       - id: unknown_10
         type: u1
-        if: version >= 3
+        if:  _root.version >= 3
       - id: unknown_11
         type: u4
-        if: version >= 3
+        if:  _root.version >= 3
       - id: unknown_12
         type: u4
-        if: version >= 3
+        if:  _root.version >= 3
       - id: unknown_13
         type: u4
-        if: version >= 3
+        if:  _root.version >= 3
       - id: unknown_14
         type: u1
-        if: version >= 3
+        if:  _root.version >= 3
       - id: unknown_15
         type: u4
-        if: version >= 3
+        if:  _root.version >= 3
   flags:
     seq:
       - id: is_looping
@@ -98,3 +101,21 @@ types:
         type: b1
       - id: is_music
         type: b1
+enums:
+  channel:
+    "-1": default
+    0: general
+    1: unit_selection
+    2: unit_acknowledgement
+    3: unit_movement
+    4: unit_ready
+    5: combat
+    6: error
+    7: music
+    8: user_interface
+    9: movement_looping
+    10: ambient
+    11: animation
+    12: building
+    13: birth
+    14: fire
