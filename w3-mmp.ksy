@@ -10,12 +10,12 @@ seq:
 types:
   icons_chunk:
     seq:
-      - id: icons_amount
+      - id: num_icon
         type: u4
       - id: icon
         type: icon
         repeat: expr
-        repeat-expr: icons_amount
+        repeat-expr: num_icon
   icon:
     seq:
       - id: icon_type

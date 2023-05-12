@@ -1,6 +1,6 @@
 meta:
-  id: w3_w3a
-  file-extension: w3a
+  id: w3_w3u
+  file-extension: w3u
   endian: le
   imports:
     - w3id
@@ -46,10 +46,10 @@ types:
       - id: var_type
         type: u4
         enum: var_types
-      - id: level
-        type: u4
-      - id: data_pt
-        type: u4
+      #- id: level
+      #  type: u4
+      #- id: data_pt
+      #  type: u4
       - id: value
         type:
           switch-on: var_type

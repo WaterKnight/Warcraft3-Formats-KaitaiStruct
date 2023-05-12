@@ -6,25 +6,25 @@ meta:
     - w3id
 seq:
   - id: file_id
-    type: u4
+    type: w3id
   - id: version
     type: u4
   - id: sub_version
     type: u4
-  - id: doodads_amount
+  - id: num_doodad
     type: u4
   - id: doodad
     type: doodad
     repeat: expr
-    repeat-expr: doodads_amount
+    repeat-expr: num_doodad
   - id: special_doodad_version
     type: u4
-  - id: special_doodads_amount
+  - id: num_special_doodad
     type: u4
   - id: special_doodad
     type: special_doodad
     repeat: expr
-    repeat-expr: special_doodads_amount
+    repeat-expr: num_special_doodad
 types:
   doodad:
     seq:
@@ -54,22 +54,22 @@ types:
         type: u1
       - id: random_item_set_ptr
         type: u4
-      - id: item_sets_amount
+      - id: num_item_set
         type: u4
       - id: item_set
         type: item_set
         repeat: expr
-        repeat-expr: item_sets_amount
+        repeat-expr: num_item_set
       - id: editor_id
         type: u4
   item_set:
     seq:
-      - id: items_amount
+      - id: num_item
         type: u4
       - id: item
         type: item
         repeat: expr
-        repeat-expr: items_amount
+        repeat-expr: num_item
   item:
     seq:
       - id: id

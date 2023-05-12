@@ -14,18 +14,18 @@ seq:
     enum: tileset
   - id: use_custom_tileset
     type: u4
-  - id: tiles_amount
+  - id: num_tile_id
     type: u4
   - id: tile_id
     type: w3id
     repeat: expr
-    repeat-expr: tiles_amount
-  - id: cliff_tiles_amount
+    repeat-expr: num_tile_id
+  - id: num_cliff_tile_id
     type: u4
   - id: cliff_tile_id
     type: w3id
     repeat: expr
-    repeat-expr: cliff_tiles_amount
+    repeat-expr: num_cliff_tile_id
   - id: map_width
     type: u4
   - id: map_height

@@ -11,12 +11,12 @@ seq:
     type: u4
   - id: sub_version
     type: u4
-  - id: units_amount
+  - id: num_unit
     type: u4
   - id: unit
     type: unit
     repeat: expr
-    repeat-expr: units_amount
+    repeat-expr: num_unit
 types:
   unit:
     seq:
@@ -54,12 +54,12 @@ types:
         type: u4
       - id: dropped_item_set_ptr
         type: u4
-      - id: dropped_item_sets_amount
+      - id: num_dropped_item_set
         type: u4
       - id: dropped_item_set
         type: item_set
         repeat: expr
-        repeat-expr: dropped_item_sets_amount
+        repeat-expr: num_dropped_item_set
       - id: resources_amount
         type: u4
       - id: target_aquisition
@@ -72,18 +72,18 @@ types:
         type: u4
       - id: hero_intelligence
         type: u4
-      - id: inventory_items_amount
+      - id: num_inventory_item
         type: u4
       - id: inventory_item
         type: inventory_item
         repeat: expr
-        repeat-expr: inventory_items_amount
-      - id: ability_mods_amount
+        repeat-expr: num_inventory_item
+      - id: num_ability_mod
         type: u4
       - id: ability_mod
         type: ability_mod
         repeat: expr
-        repeat-expr: ability_mods_amount
+        repeat-expr: num_ability_mod
       - id: random
         type: random
       - id: color
@@ -94,10 +94,12 @@ types:
         type: u4
   item_set:
     seq:
-      - id: items_amount
+      - id: num_item
         type: u4
       - id: item
         type: item
+        repeat: expr
+        repeat-expr: num_item
   item:
     seq:
       - id: id
@@ -122,7 +124,9 @@ types:
   random:
     seq:
       - id: random_type
-        type: u4
+        type: u2
+      - id: random_type_rest
+        type: u2
       - id: value
         type:
           switch-on: random_type
@@ -148,13 +152,13 @@ types:
         type: u4
   custom_group:
     seq:
-      - id: units_amount
+      - id: num_group_unit
         type: u4
-      - id: unit
+      - id: group_unit
         type: unit
         repeat: expr
-        repeat-expr: units_amount
-  unit:
+        repeat-expr: num_group_unit
+  group_unit:
     seq:
       - id: id
         type: w3id

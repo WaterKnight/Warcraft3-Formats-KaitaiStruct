@@ -10,7 +10,7 @@ seq:
   - id: version
     type: u4
     doc: The version of the format.
-  - id: saves_amount
+  - id: saves
     type: u4
     if: version >= 16
     doc: How many times the map was saved in the editor.
@@ -62,6 +62,7 @@ seq:
     type: loading_screen
   - id: game_data_set
     type: u4
+    enum: game_data_set
     if: version >= 17
   - id: unknown_path
     type: w3str
@@ -73,7 +74,7 @@ seq:
     type: fog
     if: version >= 19
   - id: global_weather_id
-    type: u4
+    type: w3id
     if: version >= 21
   - id: sound_environment
     type: w3str
@@ -155,13 +156,13 @@ types:
         type: f4
   camera_bounds:
     seq:
-      - id: camera_bound_left
+      - id: camera_bound_bottom_left
         type: point_2d
-      - id: camera_bound_bottom
+      - id: camera_bound_top_right
         type: point_2d
-      - id: camera_bound_right
+      - id: camera_bound_top_left
         type: point_2d
-      - id: camera_bound_top
+      - id: camera_bound_bottom_right
         type: point_2d
   margins:
     seq:
@@ -175,48 +176,63 @@ types:
       type: u4
   flags:
     seq:
-      - id: hide_minimap_on_preview_screens
-        type: b1
-      - id: change_ally_priorities
-        type: b1
-      - id: melee
-        type: b1
-      - id: non_default_tileset_map_size_large_never_been_reduced_to_medium
-        type: b1
-      - id: unexplored_areas_partially_visible
-        type: b1
-      - id: fixed_player_parameters_for_custom_teams
+      - id: use_custom_techs
         type: b1
       - id: use_custom_teams
         type: b1
-      - id: use_custom_techs
+      - id: fixed_player_parameters_for_custom_teams
         type: b1
-      - id: use_custom_abilities
+      - id: unexplored_areas_partially_visible
         type: b1
-      - id: use_custom_upgrades
+      - id: non_default_tileset_map_size_large_never_been_reduced_to_medium
         type: b1
-      - id: map_properties_menu_opened_at_least_once
+      - id: melee
         type: b1
-      - id: show_water_waves_on_cliff_shores
+      - id: change_ally_priorities
         type: b1
-      - id: show_water_waves_on_rolling_shores
+      - id: hide_minimap_on_preview_screens
         type: b1
-      - id: use_terrain_fog
+        
+      - id: use_item_classification_system
         type: b1
       - id: tft_required
         type: b1
-      - id: item_classification
+      - id: use_terrain_fog
         type: b1
+      - id: show_water_waves_on_rolling_shores
+        type: b1
+      - id: show_water_waves_on_cliff_shores
+        type: b1
+      - id: map_properties_menu_opened_at_least_once
+        type: b1
+      - id: use_custom_upgrades
+        type: b1
+      - id: use_custom_abilities
+        type: b1
+        
       - id: custom_water_tint_color
         type: b1
+      - id: flag17
+        type: b1
+      - id: flag18
+        type: b1
+      - id: flag19
+        type: b1
+      - id: flag20
+        type: b1
+      - id: use_custom_ability_skin
+        type: b1
+      - id: use_accurate_probabilities_for_calculation
+        type: b1
+        
       - id: rest
         type: b1
         repeat: expr
-        repeat-expr: 15
+        repeat-expr: 8
   loading_screen:
     seq:
       - id: loading_screen_index
-        type: u4
+        type: s4
         if: _root.version >= 17
       - id: custom_loading_screen_path
         type: w3str
@@ -252,11 +268,11 @@ types:
         type: f4
       - id: fog_density
         type: f4
-      - id: fog_color_red
+      - id: fog_color_blue
         type: u1
       - id: fog_color_green
         type: u1
-      - id: fog_color_blue
+      - id: fog_color_red
         type: u1
       - id: fog_color_alpha
         type: u1
@@ -276,68 +292,102 @@ types:
         doc: alpha value 0-255
   graphics_modes:
     seq:
+      - id: rest
+        type: b1
+        repeat: expr
+        repeat-expr: 6
       - id: sd
         type: b1
       - id: hd
         type: b1
   players_chunk:
     seq:
-      - id: amount
+      - id: num_player
         type: u4
       - id: player
         type: player
         repeat: expr
-        repeat-expr: amount
+        repeat-expr: num_player
   player:
     seq:
       - id: num
         type: u4
       - id: controller
         type: u4
+        enum: player_controller
       - id: race
         type: u4
+        enum: player_race
       - id: fixed_position
         type: u4
-      - id: nme
+      - id: name
         type: w3str
       - id: position
         type: point_2d
       - id: ally_low_priority
-        type: u4
+        type: player_bitmap
         if: _root.version >= 5
       - id: ally_high_priority
-        type: u4
+        type: player_bitmap
         if: _root.version >= 5
       - id: enemy_low_priority
-        type: u4
+        type: player_bitmap
         if: _root.version >= 31
       - id: enemy_high_priority
-        type: u4
+        type: player_bitmap
         if: _root.version >= 31
   forces_chunk:
     seq:
-      - id: amount
+      - id: num_force
         type: u4
       - id: force
         type: force
         repeat: expr
-        repeat-expr: amount
+        repeat-expr: num_force
   force:
     seq:
       - id: flags
-        type: u4
+        type: force_flags
       - id: players
-        type: u4
+        type: player_bitmap
       - id: name
         type: w3str
+  force_flags:
+    seq:
+      - id: flag7
+        type: b1
+      - id: flag6
+        type: b1
+      - id: flag5
+        type: b1
+      - id: share_advanced_unit_control
+        type: b1
+      - id: share_unit_control
+        type: b1
+      - id: share_vision
+        type: b1
+      - id: allied_victory
+        type: b1
+      - id: allied
+        type: b1
+      - id: rest
+        type: u1
+        repeat: expr
+        repeat-expr: 3
+  player_bitmap:
+    seq:
+      - id: is_member
+        type: b1
+        repeat: expr
+        repeat-expr: 32
   upgrades_chunk:
     seq:
-      - id: amount
+      - id: num_upgrade
         type: u4
       - id: upgrade
         type: upgrade
         repeat: expr
-        repeat-expr: amount
+        repeat-expr: num_upgrade
   upgrade:
     seq:
       - id: players
@@ -350,12 +400,12 @@ types:
         type: u4
   techs_chunk:
     seq:
-      - id: amount
+      - id: num_tech
         type: u4
       - id: tech
         type: tech
         repeat: expr
-        repeat-expr: amount
+        repeat-expr: num_tech
   tech:
     seq:
       - id: players
@@ -364,64 +414,64 @@ types:
         type: w3id
   random_unit_tables_chunk:
     seq:
-      - id: amount
+      - id: num_table
         type: u4
       - id: table
         type: random_unit_table
         repeat: expr
-        repeat-expr: amount
+        repeat-expr: num_table
   random_unit_table:
     seq:
       - id: num
         type: u4
       - id: name
         type: w3str
-      - id: columns_amount
+      - id: num_column_type
         type: u4
       - id: column_type
         type: u4
         repeat: expr
-        repeat-expr: columns_amount
-      - id: rows_amount
+        repeat-expr: num_column_type
+      - id: num_row
         type: u4
       - id: row
         type: random_unit_table_row
         repeat: expr
-        repeat-expr: rows_amount
+        repeat-expr: num_row
   random_unit_table_row:
     seq:
       - id: chance
         type: u4
         repeat: expr
-        repeat-expr: _parent.columns_amount
+        repeat-expr: _parent.num_column_type
   random_item_tables_chunk:
     seq:
-      - id: amount
+      - id: num_table
         type: u4
       - id: table
         type: random_item_table
         repeat: expr
-        repeat-expr: amount
+        repeat-expr: num_table
   random_item_table:
     seq:
       - id: num
         type: u4
       - id: name
         type: w3str
-      - id: sets_amount
+      - id: num_set
         type: u4
       - id: set
         type: item_set
         repeat: expr
-        repeat-expr: sets_amount
+        repeat-expr: num_set
   item_set:
     seq:
-      - id: items_amount
+      - id: num_item
         type: u4
       - id: item
         type: item
         repeat: expr
-        repeat-expr: items_amount
+        repeat-expr: num_item
   item:
     seq:
       - id: chance
@@ -450,18 +500,33 @@ enums:
     0x58: dalaran
     0x59: cityscape
     0x5a: sunken_ruins
+  game_data_set:
+    0: default
+    1: custom
+    2: melee
   fog_type:
-    0: none
-    1: linear
-    2: exp
-    3: exp2
+    0: linear
+    1: exp
+    2: exp2
   script_language:
     0: jass
     1: lua
   game_data_version:
     0: roc
     1: tft
+  player_controller:
+    0: none
+    1: human
+    2: cpu
+    3: neutral
+    4: rescuable
+  player_race:
+    0: selectable
+    1: human
+    2: orc
+    3: undead
+    4: night_elf
 instances:
   map_name:
-    value: map_name_raw.value.substring(0, 109)
+    value: map_name_raw.value
     doc: Name of the map.

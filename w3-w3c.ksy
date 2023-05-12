@@ -7,12 +7,12 @@ meta:
 seq:
   - id: version
     type: u4
-  - id: cameras_amount
+  - id: num_camera
     type: u4
   - id: camera
     type: camera
     repeat: expr
-    repeat-expr: cameras_amount
+    repeat-expr: num_camera
 types:
   camera:
     seq:

@@ -3,19 +3,24 @@ meta:
   file-extension: wct
   endian: le
 seq:
+  - id: first_version
+    type: u4
   - id: version
     type: u4
+    if: first_version == 0x80000004
   - id: head_comment
     encoding: UTF-8
     type: strz
+    if: first_version == 1 or version == 1
   - id: head_trigger
     type: trigger
-  - id: triggers_amount
+    if: first_version == 1 or version == 1
+  - id: num_trigger
     type: u4
   - id: trigger
     type: trigger
     repeat: expr
-    repeat-expr: triggers_amount
+    repeat-expr: num_trigger
 types:
   trigger:
     seq:

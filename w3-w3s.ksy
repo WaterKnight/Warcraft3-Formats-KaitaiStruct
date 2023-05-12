@@ -5,12 +5,12 @@ meta:
 seq:
   - id: version
     type: u4
-  - id: sounds_amount
+  - id: num_sound
     type: u4
   - id: sound
     type: sound
     repeat: expr
-    repeat-expr: sounds_amount
+    repeat-expr: num_sound
 types:
   w3str:
     seq:

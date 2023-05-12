@@ -8,12 +8,12 @@ meta:
 seq:
   - id: version
     type: u4
-  - id: regions_amount
+  - id: num_region
     type: u4
   - id: region
     type: region
     repeat: expr
-    repeat-expr: regions_amount
+    repeat-expr: num_region
 types:
   region:
     seq:
