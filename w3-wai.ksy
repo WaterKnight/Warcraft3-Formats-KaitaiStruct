@@ -13,7 +13,7 @@ seq:
     type: w3str
   - id: race
     type: u4
-    enum: race
+    enum: ai_race
   - id: flags
     type: flags
     size: 4
@@ -194,9 +194,9 @@ types:
     seq:
       - id: priority_type
         type: u4
-      - id: type
+      - id: tech_type
         type: u4
-        enum: build_priority
+        enum: build_priority_tech_type
       - id: tech
         type: w3id
         #enum: build_priority_tech
@@ -455,7 +455,7 @@ types:
         type: u4
       - id: race
         type: u4
-        enum: race
+        enum: player_race
       - id: color
         type: u4
       - id: handicap
@@ -475,13 +475,13 @@ types:
       - id: import_time
         type: w3str
 enums:
-  race:
+  ai_race:
     0: custom
     1: human
     2: orc
     3: undead
     4: night_elf
-  build_priority:
+  build_priority_tech_type:
     0: unit
     1: upgrade
     2: expansion_town
@@ -533,7 +533,7 @@ enums:
   allow_flyers:
     0: false
     1: true
-  race:
+  player_race:
     0: human
     2: orc
     8: undead
