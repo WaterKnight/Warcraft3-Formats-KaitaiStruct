@@ -4,6 +4,9 @@ meta:
   endian: le
   imports:
     - w3id
+params:
+  - id: use_skin
+    type: u1
 seq:
   - id: file_id
     type: w3id
@@ -48,18 +51,22 @@ types:
         type: f4
       - id: skin_id
         type: w3id
+        if: _root.use_skin != 0
       - id: flags
         type: u1
       - id: life
         type: u1
       - id: random_item_set_ptr
         type: u4
+        if: _root.version == 8
       - id: num_item_set
         type: u4
+        if: _root.version == 8
       - id: item_set
         type: item_set
         repeat: expr
         repeat-expr: num_item_set
+        if: _root.version == 8
       - id: editor_id
         type: u4
   item_set:

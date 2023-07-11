@@ -4,6 +4,9 @@ meta:
   endian: le
   imports:
     - w3id
+params:
+  - id: use_skin
+    type: u1
 seq:
   - id: file_id
     type: w3id
@@ -23,7 +26,7 @@ types:
       - id: id
         type: w3id
       - id: variation
-        type: u8
+        type: u4
       - id: x
         type: f4
       - id: y
@@ -38,8 +41,9 @@ types:
         type: f4
       - id: scale_z
         type: f4
-      #- id: skin_id
-      #  type: w3id
+      - id: skin_id
+        type: w3id
+        if: _root.use_skin != 0
       - id: flags
         type: u1
       - id: owner_index
@@ -54,6 +58,7 @@ types:
         type: u4
       - id: dropped_item_set_ptr
         type: u4
+        if: _root.sub_version == 11
       - id: num_dropped_item_set
         type: u4
       - id: dropped_item_set
@@ -68,10 +73,13 @@ types:
         type: u4
       - id: hero_strength
         type: u4
+        if: _root.sub_version == 11
       - id: hero_agility
         type: u4
+        if: _root.sub_version == 11
       - id: hero_intelligence
         type: u4
+        if: _root.sub_version == 11
       - id: num_inventory_item
         type: u4
       - id: inventory_item
@@ -155,7 +163,7 @@ types:
       - id: num_group_unit
         type: u4
       - id: group_unit
-        type: unit
+        type: group_unit
         repeat: expr
         repeat-expr: num_group_unit
   group_unit:
