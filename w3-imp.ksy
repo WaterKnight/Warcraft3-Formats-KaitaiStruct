@@ -7,14 +7,14 @@ meta:
 seq:
   - id: version
     type: u4
-  - id: amount
+  - id: num_import_obj
     type: u4
-  - id: path
-    type: import
+  - id: import_obj
+    type: import_obj
     repeat: expr
-    repeat-expr: amount
+    repeat-expr: num_import_obj
 types:
-  import:
+  import_obj:
     seq:
       - id: flags
         type: u1
