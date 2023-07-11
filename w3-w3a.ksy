@@ -29,10 +29,12 @@ types:
         type: w3id
       - id: num_unknown
         type: u4
+        if: _root.version == 3
       - id: unknown
         type: u4
         repeat: expr
         repeat-expr: num_unknown
+        if: _root.version == 3
       - id: num_mod
         type: u4
       - id: mod
