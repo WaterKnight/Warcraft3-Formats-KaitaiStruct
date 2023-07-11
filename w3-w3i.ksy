@@ -115,6 +115,7 @@ seq:
     if: version >= 24
   - id: script_language2
     type: u4
+    #if: false
     if: version == 26 or version == 27
 
 types:
@@ -250,7 +251,7 @@ types:
     seq:
       - id: prologue_screen_path
         type: w3str
-        if: _root.version >= 18
+        if: _root.version != 18 and _root.version != 19
       - id: prologue_screen_text
         type: w3str
       - id: prologue_screen_title
@@ -422,7 +423,7 @@ types:
         repeat-expr: num_table
   random_unit_table:
     seq:
-      - id: num
+      - id: index
         type: u4
       - id: name
         type: w3str
@@ -430,6 +431,7 @@ types:
         type: u4
       - id: column_type
         type: u4
+        enum: random_unit_table_column_type
         repeat: expr
         repeat-expr: num_column_type
       - id: num_row
@@ -442,6 +444,8 @@ types:
     seq:
       - id: chance
         type: u4
+      - id: id
+        type: w3id
         repeat: expr
         repeat-expr: _parent.num_column_type
   random_item_tables_chunk:
@@ -526,6 +530,10 @@ enums:
     2: orc
     3: undead
     4: night_elf
+  random_unit_table_column_type:
+    0: unit_table
+    1: building_table
+    2: item_table
 instances:
   map_name:
     value: map_name_raw.value
