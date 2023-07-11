@@ -71,9 +71,9 @@ types:
         type: b4
   cliff_texture_and_layer_height:
     seq:
-      - id: layer
-        type: b4
       - id: texture
+        type: b4
+      - id: layer
         type: b4
 enums:
   tileset:
