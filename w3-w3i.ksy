@@ -26,6 +26,8 @@ seq:
     type: w3str
   - id: author
     type: w3str
+  - id: description
+    type: w3str
   - id: recommended_players
     type: w3str
     if: version >= 8
@@ -35,8 +37,6 @@ seq:
   - id: unknown_v4_to_v8
     type: unknown_v4_to_v8
     if: version > 3 and version <= 8
-  - id: unknown_string
-    type: w3str
   - id: camera_bounds
     type: camera_bounds
   - id: margins
