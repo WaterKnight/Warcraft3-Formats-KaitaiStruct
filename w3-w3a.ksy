@@ -18,10 +18,10 @@ types:
       - id: num_object
         type: u4
       - id: object
-        type: object
+        type: obj
         repeat: expr
         repeat-expr: num_object
-  object:
+  obj:
     seq:
       - id: base_id
         type: w3id
