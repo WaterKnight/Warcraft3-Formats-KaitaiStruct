@@ -49,7 +49,7 @@ types:
     seq:
       - id: content
         terminator: 0
-        #process: blizzard_decompress
+        process: blizzard_decompress
   block:
     seq:
       - id: block_id
@@ -771,10 +771,6 @@ types:
         type: u1
       - id: len_int_extra
         type: u1
-      #- id: end
-      #  type: u1
-      #  repeat: expr
-      #  repeat-expr: 13 + len_int_extra
 enums:
   custom_or_ladder:
     0x00: custom0
