@@ -2,6 +2,8 @@ meta:
   id: w3_w3s
   file-extension: w3s
   endian: le
+  imports:
+    - w3str
 seq:
   - id: version
     type: u4
@@ -12,11 +14,6 @@ seq:
     repeat: expr
     repeat-expr: num_sound
 types:
-  w3str:
-    seq:
-      - id: value
-        encoding: UTF-8
-        type: strz
   sound:
     seq:
       - id: name
@@ -36,9 +33,9 @@ types:
         type: s4
       - id: pitch
         type: f4
-      - id: unknown_1
-        type: u4
-      - id: unknown_2
+      - id: pitch_variance
+        type: f4
+      - id: priority
         type: s4
       - id: channel
         type: s4
@@ -49,61 +46,76 @@ types:
         type: f4
       - id: cutoff_distance
         type: f4
-      - id: unknown_3
+      - id: cone_inside
         type: f4
-      - id: unknown_4
+      - id: cone_outside
         type: f4
-      - id: unknown_5
+      - id: cone_outside_volume
+        type: s4
+      - id: cone_orientation_x
         type: f4
-      - id: unknown_6
-        type: u4
-      - id: unknown_7
+      - id: cone_orientation_y
         type: f4
-      - id: unknown_8
+      - id: cone_orientation_z
         type: f4
       - id: var_name
         type: w3str
-        if: _root.version >= 3
+        if: _root.version >= 2
       - id: internal_sound_name
         type: w3str
-        if: _root. version >= 3
+        if: _root. version >= 2
       - id: sound_path
         type: w3str
-        if:  _root.version >= 3
+        if:  _root.version >= 2
       - id: unknown_9
-        type: f4
-        if:  _root.version >= 3
+        type: s4
+        if:  _root.version >= 2
       - id: unknown_10
-        type: u1
-        if:  _root.version >= 3
+        type: w3str
+        if:  _root.version >= 2
       - id: unknown_11
-        type: u4
-        if:  _root.version >= 3
+        type: s4
+        if:  _root.version >= 2
       - id: unknown_12
-        type: u4
-        if:  _root.version >= 3
+        type: w3str
+        if:  _root.version >= 2
       - id: unknown_13
-        type: u4
-        if:  _root.version >= 3
+        type: s4
+        if:  _root.version >= 2
       - id: unknown_14
-        type: u1
-        if:  _root.version >= 3
+        type: w3str
+        if:  _root.version >= 2
       - id: unknown_15
-        type: u4
+        type: w3str
+        if:  _root.version >= 2
+      - id: unknown_16
+        type: w3str
+        if:  _root.version >= 2
+      - id: unknown_17
+        type: w3str
+        if:  _root.version >= 2
+      - id: unknown_18
+        type: s4
         if:  _root.version >= 3
   flags:
     seq:
-      - id: is_looping
+      - id: rest
         type: b1
-      - id: is_sound
-        type: b1
-      - id: stop_when_out_of_range
+        repeat: expr
+        repeat-expr: 3
+      - id: is_imported
         type: b1
       - id: is_music
         type: b1
+      - id: stop_when_out_of_range
+        type: b1
+      - id: is_3d
+        type: b1
+      - id: is_looping
+        type: b1
 enums:
   channel:
-    "-1": default
+    -1: default
     0: general
     1: unit_selection
     2: unit_acknowledgement
