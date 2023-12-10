@@ -167,14 +167,14 @@ types:
         type: point_2d
   margins:
     seq:
-    - id: left
-      type: u4
-    - id: right
-      type: u4
-    - id: bottom
-      type: u4
-    - id: top
-      type: u4
+      - id: left
+        type: s4
+      - id: right
+        type: s4
+      - id: bottom
+        type: s4
+      - id: top
+        type: s4
   flags:
     seq:
       - id: use_custom_techs
@@ -193,7 +193,7 @@ types:
         type: b1
       - id: hide_minimap_on_preview_screens
         type: b1
-        
+
       - id: use_item_classification_system
         type: b1
       - id: tft_required
@@ -210,7 +210,7 @@ types:
         type: b1
       - id: use_custom_abilities
         type: b1
-        
+
       - id: custom_water_tint_color
         type: b1
       - id: flag17
@@ -225,7 +225,7 @@ types:
         type: b1
       - id: use_accurate_probabilities_for_calculation
         type: b1
-        
+
       - id: rest
         type: b1
         repeat: expr
@@ -269,11 +269,11 @@ types:
         type: f4
       - id: fog_density
         type: f4
-      - id: fog_color_blue
+      - id: fog_color_red
         type: u1
       - id: fog_color_green
         type: u1
-      - id: fog_color_red
+      - id: fog_color_blue
         type: u1
       - id: fog_color_alpha
         type: u1
@@ -355,6 +355,11 @@ types:
         type: w3str
   force_flags:
     seq:
+      - id: bits
+        type: force_flags_bits
+        size: 4
+  force_flags_bits:
+    seq:
       - id: flag7
         type: b1
       - id: flag6
@@ -376,6 +381,11 @@ types:
         repeat: expr
         repeat-expr: 3
   player_bitmap:
+    seq:
+      - id: bits
+        type: player_bitmap_bits
+        size: 4
+  player_bitmap_bits:
     seq:
       - id: is_member
         type: b1
