@@ -1,6 +1,6 @@
 meta:
-  id: w3_w3u
-  file-extension: w3u
+  id: w3_w3t
+  file-extension: w3t
   imports:
     - w3-obj-mod-file
 seq:
