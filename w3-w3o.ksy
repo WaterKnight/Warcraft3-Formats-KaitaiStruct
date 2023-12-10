@@ -16,17 +16,17 @@ seq:
   - id: use_item
     type: u4
   - id: item
-    type: w3_w3u
+    type: w3_w3t
     if: use_item == 1
   - id: use_destructable
     type: u4
   - id: destructable
-    type: w3_w3u
+    type: w3_w3b
     if: use_destructable == 1
   - id: use_doodad
     type: u4
   - id: doodad
-    type: w3_w3a
+    type: w3_w3d
     if: use_doodad == 1
   - id: use_ability
     type: u4
@@ -36,10 +36,10 @@ seq:
   - id: use_buff
     type: u4
   - id: buff
-    type: w3_w3u
+    type: w3_w3h
     if: use_buff == 1
   - id: use_upgrade
     type: u4
   - id: upgrade
-    type: w3_w3a
+    type: w3_w3q
     if: use_upgrade == 1
