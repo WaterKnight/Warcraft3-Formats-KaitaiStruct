@@ -30,16 +30,24 @@ types:
       - id: new_id
         type: w3id
       - id: num_set
-        type: u4
-        if: _root.version >= 3
+        type: num_set
       - id: set
         type: set
         repeat: expr
-        repeat-expr: num_set ?? 1
+        repeat-expr: num_set.value
+  num_set:
+    seq:
+      - id: num_set
+        type: u4
+        if: _root.version >= 3
+    instances:
+      value:
+        value: '_root.version >= 3 ? num_set : 1'
   set:
     seq:
       - id: set_flag
         type: u4
+        if: _root.version >= 3
       - id: num_mod
         type: u4
       - id: mod
