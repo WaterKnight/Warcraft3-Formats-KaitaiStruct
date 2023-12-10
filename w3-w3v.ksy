@@ -111,9 +111,9 @@ types:
         type: u4
       - id: unused_skill_points
         type: u4
-      - id: unknown0
-        type: u2
       - id: hero_proper_name_index
+        type: u2
+      - id: unknown_hero_proper_name_index2
         type: u2
       - id: str
         type: u4
@@ -206,7 +206,7 @@ types:
         type: b1
       - id: flag4
         type: b1
-      - id: flag3
+      - id: use_automatically_when_acquired
         type: b1
       - id: droppable
         type: b1
