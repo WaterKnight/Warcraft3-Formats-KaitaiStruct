@@ -7,7 +7,7 @@ meta:
 seq:
   - id: version
     type: u4
-  - id: num_saves
+  - id: saves
     type: u4
   - id: editor_version
     type: u4
