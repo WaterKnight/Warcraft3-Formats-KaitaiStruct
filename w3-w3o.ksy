@@ -3,8 +3,13 @@ meta:
   file-extension: w3o
   endian: le
   imports:
-    - w3-w3u
     - w3-w3a
+    - w3-w3b
+    - w3-w3d
+    - w3-w3h
+    - w3-w3q
+    - w3-w3t
+    - w3-w3u
 seq:
   - id: version
     type: u4
