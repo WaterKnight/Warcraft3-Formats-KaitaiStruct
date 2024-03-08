@@ -10,7 +10,7 @@ seq:
   - id: chunk
     type: chunk_router
     repeat: expr
-    repeat-expr: 14
+    repeat-expr: 8
 types:
   chunk_router:
     seq:
@@ -73,6 +73,19 @@ types:
       - id: collision_shape
         type: collision_shape
         repeat: eos
+  collision_shape:
+    seq:
+      - id: node
+        type: node
+      - id: type
+        type: u4
+      - id: vertex
+        type: f4_3
+        repeat: expr
+        repeat-expr: type == 2 ? 1 : 2
+      - id: radius
+        type: f4
+        if: type == 2 or type == 3
   chunk_evts:
     seq:
       - id: event_object
@@ -273,7 +286,7 @@ types:
         size: 4
       - id: payload
         type:
-          switch-on: discriminator.to_s("ASCII")
+          switch-on: discriminator.to_s(ASCII)
           cases:
             "'KMTF'": kmtf_chunk
             "'KMTA'": kmta_chunk
@@ -287,7 +300,7 @@ types:
         value: payload
         if: discriminator[0] != 75 # K
       track_magic:
-        value: discriminator.to_s("ASCII")
+        value: discriminator.to_s(ASCII)
         if: discriminator[0] == 75 # K
   texture_anim:
     seq:
@@ -461,7 +474,7 @@ types:
         type: w3id
       - id: num_tangent
         type: u4
-      - id: tangent
+      - id: tantent
         type: tangent
         repeat: expr
         repeat-expr: num_tangent
@@ -534,11 +547,11 @@ types:
   kgao_chunk:
     seq:
       - id: value
-        type: track_chunk("f4")
+        type: track_chunk_parametric_no_magic("f4")
   kgac_chunk:
     seq:
       - id: value
-        type: track_chunk("f4_3")
+        type: track_chunk_parametric_no_magic("f4_3")
   bone:
     seq:
       - id: node
@@ -598,6 +611,10 @@ types:
             '"KLBI"': klbi_chunk
             '"KLBC"': klbc_chunk
             '"KLAV"': klav_chunk
+  helper:
+    seq:
+      - id: node
+        type: node
   attachment:
     seq:
       - id: inclusive_size
@@ -819,14 +836,14 @@ types:
         type: node
       - id: kevt_magic
         type: w3id
-      - id: num_track_chunk
+      - id: num_track
         type: u4
       - id: global_sequence_id
         type: u4
       - id: track_chunk
         type: u4
         repeat: expr
-        repeat-expr: num_track_chunk
+        repeat-expr: num_track
   segment_color:
     seq:
       - id: color1
@@ -948,27 +965,27 @@ types:
   kgtr_chunk:
     seq:
       - id: value
-        type: track_chunk("f4_3") #translation
+        type: track_chunk_parametric_no_magic("f4_3") #translation
   kgrt_chunk:
     seq:
       - id: value
-        type: track_chunk("f4_4") #rotation
+        type: track_chunk_parametric_no_magic("f4_4") #rotation
   kgsc_chunk:
     seq:
       - id: value
-        type: track_chunk("f4_3") #scaling
+        type: track_chunk_parametric_no_magic("f4_3") #scaling
   kmtf_chunk:
     seq:
       - id: value
-        type: track_chunk("u4") #texture_id
+        type: track_chunk_parametric_no_magic("u4") #texture_id
   kmta_chunk:
     seq:
       - id: value
-        type: track_chunk("f4") #alpha, f4
+        type: track_chunk_parametric_no_magic("f4") #alpha, f4
   kmte_chunk:
     seq:
       - id: value
-        type: track_chunk("f4") #emissive_gain, f4
+        type: track_chunk_parametric_no_magic("f4") #emissive_gain, f4
   kfc3_chunk:
     seq:
       - id: fresnel_color
@@ -998,6 +1015,12 @@ types:
   ktas_chunk:
     seq:
       - id: scaling
+        type: f4
+        repeat: expr
+        repeat-expr: 3
+  kgac_chunk:
+    seq:
+      - id: color
         type: f4
         repeat: expr
         repeat-expr: 3
@@ -1036,7 +1059,7 @@ types:
   katv_chunk:
     seq:
       - id: value
-        type: track_chunk("f4") #visibility
+        type: track_chunk_parametric_no_magic("f4") #visibility
   kpee_chunk:
     seq:
       - id: emission_rate
@@ -1166,12 +1189,44 @@ types:
       - id: visibility
         type: f4
   track_chunk:
+    #params:
+    #  - id: value_type
+    #    type: str
+    seq:
+      - id: magic
+        type: w3id
+      - id: num_track
+        type: u4
+      - id: interpolation_type
+        type: u4
+      - id: global_sequence_id
+        type: u4
+      - id: track
+        type: track("u4", interpolation_type)
+        repeat: expr
+        repeat-expr: num_track
+  track_chunk_parametric:
     params:
       - id: value_type
         type: str
     seq:
       - id: magic
         type: w3id
+      - id: num_track
+        type: u4
+      - id: interpolation_type
+        type: u4
+      - id: global_sequence_id
+        type: u4
+      - id: track
+        type: track(value_type, interpolation_type)
+        repeat: expr
+        repeat-expr: num_track
+  track_chunk_parametric_no_magic:
+    params:
+      - id: value_type
+        type: str
+    seq:
       - id: num_track
         type: u4
       - id: interpolation_type
